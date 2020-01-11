@@ -5,6 +5,5 @@ import employee.tracking.system.model.dto.TrackedInformationDto;
 
 public interface DataTransformer {
 
-    void transform(TrackedInformationDto trackedInformationDto, MeterStore meterStore);
-
+    void expose(TrackedInformationDto trackedInformationDto);
 }

@@ -4,10 +4,10 @@ import employee.tracking.system.metrics.store.MeterStore;
 
 public abstract class AbstractDataTransformer implements DataTransformer {
 
-    private MeterStore meterStore;
+    protected MeterStore meterStore;
 
-    public AbstractDataTransformer(MeterStore gaugeMeterStore) {
-        this.meterStore = gaugeMeterStore;
+    public AbstractDataTransformer(MeterStore meterStore) {
+        this.meterStore = meterStore;
     }
 
 }
