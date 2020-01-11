@@ -1,10 +1,12 @@
 import ctypes
 import psutil
 import time
+import cv2
 
 
 def countClicks(countingTime, updatePeriod):
     start = time.time()
+
     print("start")
     buttonState = []
     mouseClicks = 0
@@ -17,6 +19,7 @@ def countClicks(countingTime, updatePeriod):
     cpuUsage = 0
     memoryUsage = 0
     psutil.cpu_percent()
+
     while 1:
         if (time.time() - lastUpdate) > updatePeriod:
             cpuUsage += psutil.cpu_percent()
@@ -31,6 +34,11 @@ def countClicks(countingTime, updatePeriod):
             print("keyboard clicks: " + str(keyboardClicks))
             print("cpu usage: " + str(cpuUsage))
             print("memory usage: " + str(memoryUsage))
+            cam = cv2.VideoCapture(0)
+            ret, image = cam.read()
+            name = "image.png"
+            cv2.imwrite(name, image)
+            cam.release()
             # call sending
             mouseClicks = 0
             keyboardClicks = 0
@@ -42,7 +50,6 @@ def countClicks(countingTime, updatePeriod):
                     if x < 5:
                         mouseClicks += 1
                         print(str(x) + " pressed (mouse)")
-
                     else:
                         keyboardClicks += 1
                         print(str(x) + " pressed (keyboard)")
@@ -55,4 +62,4 @@ def countClicks(countingTime, updatePeriod):
         time.sleep(0.01)
 
 
-countClicks(10, 1)
+countClicks(60, 1)
