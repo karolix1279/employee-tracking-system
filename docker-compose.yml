@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  prometheus:
+    build: "./config/prometheusConfig"
+    container_name: "prometheus"
+    expose:
+      - 9090
+  grafana:
+    build: "./config/grafanaConfig"
+    container_name: "grafana"
+    ports:
+    - 3000:3000
+
