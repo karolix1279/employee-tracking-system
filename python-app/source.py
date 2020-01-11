@@ -5,8 +5,20 @@ import cv2
 import json
 import requests
 import socket
+import getpass
+
 server_address = "http://10.230.105.90:6789/api/collect"
 
+def get_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        s.connect(('10.255.255.255', 1))
+        IP = s.getsockname()[0]
+    except:
+        IP = '127.0.0.1'
+    finally:
+        s.close()
+    return IP
 
 def send(comp_name="default", keyboard_clicks=-1, mouse_clicks=-1, cpu_usage=-1, memory_usage=-1, image=None):
     data = {
@@ -58,6 +70,8 @@ def countClicks(countingTime, updatePeriod):
             cv2.imwrite(imageName, image)
             cam.release()
             computerName = socket.gethostname()
+            ip = get_ip()
+            current_user = getpass.getuser()
             send(comp_name=computerName, keyboard_clicks=keyboardClicks, mouse_clicks=mouseClicks, cpu_usage=cpuUsage,
                  memory_usage=memoryUsage, image=image)
             mouseClicks = 0
