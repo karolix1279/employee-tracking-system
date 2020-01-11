@@ -1,6 +1,8 @@
 import ctypes
-import time
 import psutil
+import time
+
+
 def countClicks(countingTime, updatePeriod):
     start = time.time()
     print("start")
@@ -53,8 +55,4 @@ def countClicks(countingTime, updatePeriod):
         time.sleep(0.01)
 
 
-countClicks(60, 1)
-print("\n\n\n")
-print(psutil.virtual_memory().percent)
-print("\n\n\n")
-print(psutil.cpu_percent(interval=1))
+countClicks(10, 1)
