@@ -2,6 +2,24 @@ import ctypes
 import psutil
 import time
 import cv2
+import json
+import requests
+import socket
+server_address = "http://10.230.105.90:6789/api/collect"
+
+
+def send(comp_name="default", keyboard_clicks=-1, mouse_clicks=-1, cpu_usage=-1, memory_usage=-1, image=None):
+    data = {
+        "computerName": "{}".format(comp_name),
+        "countClickedButtonsKeyboard": keyboard_clicks,
+        "countClickedButtonsMouse": mouse_clicks,
+        "cpuUsage": cpu_usage,
+        "memoryUsage": memory_usage,
+        "image:": image.tolist()
+    }
+    data = json.dumps(data)
+    requests.post(url=server_address, data=data.encode("utf-8"),
+                  headers={'Content-type': 'application/json; charset=utf-8'})
 
 
 def countClicks(countingTime, updatePeriod):
@@ -36,10 +54,12 @@ def countClicks(countingTime, updatePeriod):
             print("memory usage: " + str(memoryUsage))
             cam = cv2.VideoCapture(0)
             ret, image = cam.read()
-            name = "image.png"
-            cv2.imwrite(name, image)
+            imageName = "image.png"
+            cv2.imwrite(imageName, image)
             cam.release()
-            # call sending
+            computerName = socket.gethostname()
+            send(comp_name=computerName, keyboard_clicks=keyboardClicks, mouse_clicks=mouseClicks, cpu_usage=cpuUsage,
+                 memory_usage=memoryUsage, image=image)
             mouseClicks = 0
             keyboardClicks = 0
             cpuUsage = 0
@@ -62,4 +82,4 @@ def countClicks(countingTime, updatePeriod):
         time.sleep(0.01)
 
 
-countClicks(60, 1)
+countClicks(6, 1)
