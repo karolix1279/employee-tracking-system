@@ -1,0 +1,13 @@
+package employee.tracking.system.emploeetrackingsystemserver;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class EmploeeTrackingSystemServerApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
