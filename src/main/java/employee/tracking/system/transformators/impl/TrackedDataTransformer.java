@@ -1,6 +1,5 @@
 package employee.tracking.system.transformators.impl;
 
-import employee.tracking.system.metrics.store.GaugeMeterStore;
 import employee.tracking.system.metrics.store.MeterStore;
 import employee.tracking.system.model.dto.TrackedInformationDto;
 import employee.tracking.system.transformators.AbstractDataTransformer;
@@ -22,10 +21,12 @@ public class TrackedDataTransformer extends AbstractDataTransformer {
                 Tag.of("computerName",trackedInformationDto.getComputerName())
         );
 
-        super.meterStore.updateMeterValue("clicked_buttons_mouse",
+        super.meterStore.updateMeterValue("clicked_buttons_mouse_"
+                        +trackedInformationDto.getComputerName(),
                 trackedInformationDto.getCountClickedButtonsMouse(), tagList);
 
-        super.meterStore.updateMeterValue("clicked_buttons_keyboard",
+        super.meterStore.updateMeterValue("clicked_buttons_keyboard_"
+                        +trackedInformationDto.getComputerName(),
                 trackedInformationDto.getCountClickedButtonsMouse(), tagList);
     }
 }

@@ -7,7 +7,7 @@ import io.micrometer.core.instrument.Tag;
 
 import java.util.List;
 
-public class GaugeMeterStore<T extends Number> extends AbstractMeterStore<T, Gauge> {
+    public class GaugeMeterStore<T extends Number> extends AbstractMeterStore<T, Gauge> {
 
     public GaugeMeterStore(MeterRegistry prometheusMeterRegistry) {
         super(prometheusMeterRegistry);

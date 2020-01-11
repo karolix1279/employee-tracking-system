@@ -1,12 +1,12 @@
 package employee.tracking.system.service;
 
-import io.micrometer.core.instrument.MeterRegistry;
+import employee.tracking.system.metrics.store.MeterStore;;
 
 public abstract class AbstractService {
 
-    protected MeterRegistry meterRegistry;
+    protected MeterStore meterStore;
 
-    public AbstractService(MeterRegistry meterRegistry) {
-        this.meterRegistry = meterRegistry;
+    public AbstractService(MeterStore meterStore) {
+        this.meterStore = meterStore;
     }
 }
