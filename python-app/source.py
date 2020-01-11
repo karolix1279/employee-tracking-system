@@ -7,7 +7,8 @@ import requests
 import socket
 import getpass
 
-server_address = "http://10.230.105.90:6789/api/collect"
+server_address = "http://10.230.105.90:6789"
+
 
 def get_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -20,18 +21,28 @@ def get_ip():
         s.close()
     return IP
 
-def send(comp_name="default", keyboard_clicks=-1, mouse_clicks=-1, cpu_usage=-1, memory_usage=-1, image=None):
+
+def send(comp_name="default", keyboard_clicks=-1, mouse_clicks=-1, cpu_usage=-1, memory_usage=-1, ip=None,
+         current_user=None):
     data = {
         "computerName": "{}".format(comp_name),
         "countClickedButtonsKeyboard": keyboard_clicks,
         "countClickedButtonsMouse": mouse_clicks,
         "cpuUsage": cpu_usage,
         "memoryUsage": memory_usage,
-        "image:": image.tolist()
+        "ip": ip,
+        "currentUser": current_user
     }
     data = json.dumps(data)
-    requests.post(url=server_address, data=data.encode("utf-8"),
+    print(data)
+    url = server_address + "/api/collect"
+    requests.post(url=url, data=data.encode("utf-8"),
                   headers={'Content-type': 'application/json; charset=utf-8'})
+
+
+def sendImage(image):
+    url = server_address + "/api/image"
+    requests.post(url=url, files={'media': open(image)})
 
 
 def countClicks(countingTime, updatePeriod):
@@ -64,6 +75,7 @@ def countClicks(countingTime, updatePeriod):
             print("keyboard clicks: " + str(keyboardClicks))
             print("cpu usage: " + str(cpuUsage))
             print("memory usage: " + str(memoryUsage))
+
             cam = cv2.VideoCapture(0)
             ret, image = cam.read()
             imageName = "image.png"
@@ -72,12 +84,14 @@ def countClicks(countingTime, updatePeriod):
             computerName = socket.gethostname()
             ip = get_ip()
             current_user = getpass.getuser()
-            send(comp_name=computerName, keyboard_clicks=keyboardClicks, mouse_clicks=mouseClicks, cpu_usage=cpuUsage,
-                 memory_usage=memoryUsage, image=image)
+            #send(comp_name=computerName, keyboard_clicks=keyboardClicks, mouse_clicks=mouseClicks, cpu_usage=cpuUsage,
+            #     memory_usage=memoryUsage, ip=ip, current_user=current_user)
+            sendImage(image)
             mouseClicks = 0
             keyboardClicks = 0
             cpuUsage = 0
             memoryUsage = 0
+            numberOfUpdates = 0
         for x in range(numberOfKeys):
             if ctypes.windll.user32.GetKeyState(x) not in [0, 1]:
                 if buttonState[x] != 1:
