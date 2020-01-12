@@ -40,7 +40,13 @@ public class MicrometerConfiguration {
                 if(id.getName().startsWith("process.")) {
                     return MeterFilterReply.DENY;
                 }
-                if(id.getName().startsWith("system.")) {
+                if(id.getName().startsWith("employee.tracking.system.system.")) {
+                    return MeterFilterReply.DENY;
+                }
+                if(id.getName().startsWith("employee.tracking.system.system.")) {
+                    return MeterFilterReply.DENY;
+                }
+                if(id.getName().startsWith("http.")) {
                     return MeterFilterReply.DENY;
                 }
                 return MeterFilterReply.NEUTRAL;

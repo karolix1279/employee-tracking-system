@@ -11,7 +11,7 @@
 	<groupId>employee.tracking.system</groupId>
 	<artifactId>emploee-tracking-system-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>employee-tracking-system-server</name>
+	<name>employee-tracking-employee.tracking.system.system-server</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -64,7 +64,17 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>5.2.1.RELEASE</version>
+        </dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>5.2.1.RELEASE</version>
+		</dependency>
+    </dependencies>
 
 	<build>
 		<plugins>
