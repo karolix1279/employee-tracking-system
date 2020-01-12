@@ -16,18 +16,16 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 2,
-  "iteration": 1578787710198,
+  "iteration": 1578800895142,
   "links": [],
   "panels": [
     {
       "cacheTimeout": null,
       "colorBackground": false,
-      "colorPostfix": false,
-      "colorPrefix": false,
       "colorValue": true,
       "colors": [
-        "#d44a3a",
-        "rgba(237, 129, 40, 0.89)",
+        "#C4162A",
+        "#F2495C",
         "#299c46"
       ],
       "datasource": "prom1",
@@ -40,13 +38,13 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 7,
+        "w": 5,
         "x": 0,
         "y": 0
       },
-      "id": 4,
-      "interval": "",
+      "id": 14,
+      "interval": null,
       "links": [],
       "mappingType": 1,
       "mappingTypes": [
@@ -63,7 +61,6 @@
       "nullPointMode": "connected",
       "nullText": null,
       "options": {},
-      "pluginVersion": "6.5.2",
       "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
@@ -86,32 +83,333 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "human_face{name=~\"dupa\"}",
-          "format": "time_series",
-          "instant": false,
-          "legendFormat": "",
+          "expr": "human_face{name=\"$users\"}",
+          "legendFormat": "{{name}}",
           "refId": "A"
         }
       ],
-      "thresholds": "",
+      "thresholds": "0.5,0.6",
       "timeFrom": null,
       "timeShift": null,
       "title": "Face Recognition",
+      "transparent": true,
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
         {
           "op": "=",
-          "text": "Face recognised",
-          "value": "1"
+          "text": "Face not recognised",
+          "value": "0"
         },
         {
           "op": "=",
-          "text": "Face not recognised",
-          "value": "0"
+          "text": "Face recognised",
+          "value": "1"
         }
       ],
-      "valueName": "min"
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "prom1",
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 6,
+        "y": 0
+      },
+      "id": 4,
+      "interval": "",
+      "links": [],
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "last"
+          ],
+          "defaults": {
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "nullValueMode": "connected",
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 90
+              }
+            ],
+            "title": "CPU usage",
+            "unit": "percent"
+          },
+          "override": {},
+          "values": true
+        },
+        "orientation": "horizontal",
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.5.2",
+      "targets": [
+        {
+          "expr": "tracked_data_cpu{name=~\"$users\"}",
+          "format": "time_series",
+          "instant": true,
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "CPU Usage",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": "prom1",
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 13,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "last"
+          ],
+          "defaults": {
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ],
+            "title": "RAM Memory Usage",
+            "unit": "percent"
+          },
+          "override": {},
+          "values": false
+        },
+        "orientation": "auto",
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.5.2",
+      "targets": [
+        {
+          "expr": "tracked_data_memory{name=\"$users\"}",
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "RAM Memory Usage",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPostfix": false,
+      "colorPrefix": false,
+      "colorValue": true,
+      "colors": [
+        "#C4162A",
+        "#C4162A",
+        "#299c46"
+      ],
+      "datasource": "prom1",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 19,
+        "y": 0
+      },
+      "id": 8,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "options": {},
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "#FF9830",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": 2323,
+        "ymin": 100
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "tracked_data_devices_changes{name=\"$users\"}",
+          "instant": true,
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "0.5,0.51",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Device Quantity",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "Quantity of Connected Devices  has not changed",
+          "value": "0"
+        },
+        {
+          "op": "=",
+          "text": "Quantity of Connected Devices has changed",
+          "value": "1"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "prom1",
+      "fill": 2,
+      "fillGradient": 5,
+      "gridPos": {
+        "h": 15,
+        "w": 12,
+        "x": 0,
+        "y": 7
+      },
+      "hiddenSeries": false,
+      "id": 10,
+      "legend": {
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 3,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum_over_time(tracked_data_mouse{name=~\"$users\"}[1m])/4",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Quantity Of Mouse Clicks",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -120,31 +418,31 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "prom1",
-      "fill": 1,
-      "fillGradient": 0,
+      "fill": 2,
+      "fillGradient": 4,
       "gridPos": {
-        "h": 13,
-        "w": 18,
-        "x": 0,
-        "y": 8
+        "h": 15,
+        "w": 12,
+        "x": 12,
+        "y": 7
       },
       "hiddenSeries": false,
       "id": 2,
       "legend": {
         "alignAsTable": false,
-        "avg": false,
+        "avg": true,
         "current": false,
         "hideZero": false,
-        "max": false,
-        "min": false,
+        "max": true,
+        "min": true,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 3,
       "links": [],
-      "nullPointMode": "null",
+      "nullPointMode": "null as zero",
       "options": {
         "dataLinks": []
       },
@@ -159,7 +457,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "clicked_buttons_keyboard_qutaz432423423_karfdsol{name=~\"$users\"}",
+          "expr": "sum_over_time(tracked_data_keyboard{name=~\"$users\"}[1m])/4",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{name}}",
@@ -209,7 +507,7 @@
       }
     }
   ],
-  "refresh": false,
+  "refresh": "10s",
   "schemaVersion": 21,
   "style": "dark",
   "tags": [],
@@ -218,8 +516,8 @@
       {
         "allValue": "",
         "current": {
-          "text": "dupa",
-          "value": "dupa"
+          "text": "DESKTOP-B4K6TGR-Wojtek",
+          "value": "DESKTOP-B4K6TGR-Wojtek"
         },
         "datasource": "prom1",
         "definition": "label_values(name)",
@@ -243,17 +541,17 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
-    "hidden": true,
+    "hidden": false,
     "refresh_intervals": [
       "10s"
     ]
   },
   "timezone": "browser",
-  "title": "Test21",
-  "uid": "FXsTghPZz",
-  "version": 18
+  "title": "ZSRR",
+  "uid": "Pkl5c2PZz",
+  "version": 12
 }
