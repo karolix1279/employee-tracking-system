@@ -15,6 +15,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
         http
                 .httpBasic()
                 .and()
+                .antMatcher("/swagger-ui")
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
