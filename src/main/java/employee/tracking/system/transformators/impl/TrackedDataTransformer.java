@@ -20,7 +20,7 @@ public class TrackedDataTransformer extends AbstractDataTransformer {
     @Override
     public void expose() {
 
-        String name = trackedInformationDto.getCountClickedButtonsMouse()
+        String name = trackedInformationDto.getComputerName()
                 + "-"
                 + trackedInformationDto.getCurrentUser();
 
@@ -31,23 +31,22 @@ public class TrackedDataTransformer extends AbstractDataTransformer {
                 Tag.of("name", name)
         );
 
-
-        super.meterStore.updateMeterValue(meterName,
+        super.meterStore.updateMeterValue(meterName + "_mouse",
                 trackedInformationDto.getCountClickedButtonsMouse(), tagList);
 
-        super.meterStore.updateMeterValue(meterName,
+        super.meterStore.updateMeterValue(meterName + "_keyboard",
                 trackedInformationDto.getCountClickedButtonsMouse(), tagList);
 
-        super.meterStore.updateMeterValue(meterName,
-                Double.valueOf(trackedInformationDto.getCpu_usage()), tagList);
+        super.meterStore.updateMeterValue(meterName + "_cpu",
+                trackedInformationDto.getCpu_usage(), tagList);
 
-        super.meterStore.updateMeterValue(meterName,
-                Double.valueOf(trackedInformationDto.getMemoryUsage()), tagList);
+        super.meterStore.updateMeterValue(meterName + "_memory",
+                trackedInformationDto.getMemoryUsage(), tagList);
 
-        super.meterStore.updateMeterValue(meterName,
+        super.meterStore.updateMeterValue(meterName + "_screen_changes",
                 trackedInformationDto.getScreenChanges(), tagList);
 
-        super.meterStore.updateMeterValue(meterName,
+        super.meterStore.updateMeterValue(meterName + "_devices_changes",
                 trackedInformationDto.getConnectedDevicesChanges(), tagList);
     }
 }
