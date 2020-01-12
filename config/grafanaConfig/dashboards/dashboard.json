@@ -86,7 +86,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "human_face{computerName=~\"dupa\"}",
+          "expr": "human_face{name=~\"dupa\"}",
           "format": "time_series",
           "instant": false,
           "legendFormat": "",
@@ -159,10 +159,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "clicked_buttons_keyboard_qutaz432423423_karfdsol{computerName=~\"$users\"}",
+          "expr": "clicked_buttons_keyboard_qutaz432423423_karfdsol{name=~\"$users\"}",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "{{computerName}}",
+          "legendFormat": "{{name}}",
           "refId": "A"
         }
       ],
@@ -222,14 +222,14 @@
           "value": "dupa"
         },
         "datasource": "prom1",
-        "definition": "label_values(computerName)",
+        "definition": "label_values(name)",
         "hide": 0,
         "includeAll": false,
         "label": "User",
         "multi": false,
         "name": "users",
         "options": [],
-        "query": "label_values(computerName)",
+        "query": "label_values(name)",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
