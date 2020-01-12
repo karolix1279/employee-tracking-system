@@ -14,7 +14,7 @@ public class TrackedInformationDto {
     private int countClickedButtonsKeyboard;
     private int countClickedButtonsMouse;
 
-    private double cpu_usage;
+    private double cpuUsage;
     private double memoryUsage;
 
     private String ip;

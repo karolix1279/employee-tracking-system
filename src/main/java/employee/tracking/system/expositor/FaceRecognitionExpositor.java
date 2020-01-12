@@ -1,32 +1,30 @@
-package employee.tracking.system.transformators.impl;
+package employee.tracking.system.expositor;
 
 import employee.tracking.system.endpoint.external.FaceRecognitionEndpoint;
 import employee.tracking.system.metrics.store.MeterStore;
-import employee.tracking.system.transformators.AbstractDataTransformer;
 import io.micrometer.core.instrument.Tag;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FaceRecognitionTransformer extends AbstractDataTransformer {
+public class FaceRecognitionExpositor extends AbstractDataExpositor {
 
     private FaceRecognitionEndpoint faceRecognitionEndpoint;
     private MultipartFile file;
-    private String computerName;
+    private String name;
 
-    public FaceRecognitionTransformer(MeterStore meterStore,
-                                      FaceRecognitionEndpoint faceRecognitionEndpoint,
-                                      MultipartFile file,
-                                      String computerNameDto) {
+    public FaceRecognitionExpositor(MeterStore meterStore,
+                                    FaceRecognitionEndpoint faceRecognitionEndpoint,
+                                    MultipartFile file,
+                                    String computerNameDto) {
         super(meterStore);
         this.faceRecognitionEndpoint = faceRecognitionEndpoint;
         this.file = file;
-        this.computerName = computerNameDto;
+        this.name = computerNameDto;
     }
 
     @Override
@@ -43,7 +41,9 @@ public class FaceRecognitionTransformer extends AbstractDataTransformer {
         String response = (String) responseEntity.getBody();
 
         List<Tag> tagList = new LinkedList<>();
-        tagList.add(Tag.of("computerName",computerName));
+        tagList.add(Tag.of("name", name));
+
+        System.out.println(responseEntity.getBody());
 
         if((response.contains("faceId"))) {
             super.meterStore.updateMeterValue("human_face",

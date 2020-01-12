@@ -23,10 +23,10 @@ public class ImageEndpoint {
         this.faceRecognitionEndpoint = faceRecognitionEndpoint;
     }
 
-    @PostMapping(value = "image/{computerName}")
-    public void getImage(@RequestParam("file") MultipartFile file, @PathVariable String computerName) {
-        log.info("Request received {}", computerName);
-        faceRecognitionMetricExposition.exposeMetric(faceRecognitionEndpoint, file, computerName);
+    @PostMapping(value = "image/{name}")
+    public void getImage(@RequestParam("file") MultipartFile file, @PathVariable String name) {
+        log.info("Request received {}", name);
+        faceRecognitionMetricExposition.exposeMetric(faceRecognitionEndpoint, file, name);
 
     }
 }

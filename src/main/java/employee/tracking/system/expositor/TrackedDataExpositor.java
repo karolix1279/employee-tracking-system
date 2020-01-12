@@ -1,18 +1,17 @@
-package employee.tracking.system.transformators.impl;
+package employee.tracking.system.expositor;
 
 import employee.tracking.system.metrics.store.MeterStore;
 import employee.tracking.system.model.dto.request.TrackedInformationDto;
-import employee.tracking.system.transformators.AbstractDataTransformer;
 import io.micrometer.core.instrument.Tag;
 
 import java.util.Collections;
 import java.util.List;
 
-public class TrackedDataTransformer extends AbstractDataTransformer {
+public class TrackedDataExpositor extends AbstractDataExpositor {
 
     private TrackedInformationDto trackedInformationDto;
 
-    public TrackedDataTransformer(MeterStore meterStore, TrackedInformationDto trackedInformationDto) {
+    public TrackedDataExpositor(MeterStore meterStore, TrackedInformationDto trackedInformationDto) {
         super(meterStore);
         this.trackedInformationDto = trackedInformationDto;
     }
@@ -35,10 +34,10 @@ public class TrackedDataTransformer extends AbstractDataTransformer {
                 trackedInformationDto.getCountClickedButtonsMouse(), tagList);
 
         super.meterStore.updateMeterValue(meterName + "_keyboard",
-                trackedInformationDto.getCountClickedButtonsMouse(), tagList);
+                trackedInformationDto.getCountClickedButtonsKeyboard(), tagList);
 
         super.meterStore.updateMeterValue(meterName + "_cpu",
-                trackedInformationDto.getCpu_usage(), tagList);
+                trackedInformationDto.getCpuUsage(), tagList);
 
         super.meterStore.updateMeterValue(meterName + "_memory",
                 trackedInformationDto.getMemoryUsage(), tagList);
