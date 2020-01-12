@@ -7,7 +7,7 @@ import requests
 import socket
 import getpass
 from PIL import ImageChops
-from pyscreenshot import grab
+#from pyscreenshot import grab
 import pywinusb.hid as hid
 from requests.auth import HTTPBasicAuth
 import os
@@ -83,7 +83,7 @@ def main(interval, update_period):
     number_of_updates = 0
     cpu_usage = 0
     memory_usage = 0
-    im = grab()
+#    im = grab()
     psutil.cpu_percent()
     all_hids = hid.find_all_hid_devices()
     total = 0
@@ -107,12 +107,12 @@ def main(interval, update_period):
             computer_name = socket.gethostname()
             ip = get_ip()
             current_user = getpass.getuser()
-            diff = ImageChops.difference(grab(), im)
-            bbox = diff.getbbox()
-            if bbox is not None:
-                is_screen_difference = 1
-            else:
-                is_screen_difference = 0
+#            diff = ImageChops.difference(grab(), im)
+#            bbox = diff.getbbox()
+#            if bbox is not None:
+#                is_screen_difference = 1
+#            else:
+#                is_screen_difference = 0
             all_hids = hid.find_all_hid_devices()
             past_total = total
             total = 0
@@ -125,7 +125,7 @@ def main(interval, update_period):
             send_json(comp_name=computer_name, keyboard_clicks=keyboard_clicks, mouse_clicks=mouse_clicks,
                       cpu_usage=cpu_usage,
                       memory_usage=memory_usage, ip=ip, current_user=current_user,
-                      is_screen_difference=is_screen_difference,
+#                      is_screen_difference=is_screen_difference,
                       is_devices_change=is_devices_change)
 
             mouse_clicks = 0
